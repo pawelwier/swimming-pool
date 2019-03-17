@@ -11,6 +11,8 @@ import pl.akademiakodu.swimmingpool.model.Booking;
 import pl.akademiakodu.swimmingpool.service.BookingService;
 
 import java.awt.print.Book;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class BookingController {
@@ -25,13 +27,11 @@ public class BookingController {
 
     @RequestMapping("/bookdate")
     public String ConfirmBooking(ModelMap modelMap,
-                                          @RequestParam String year,
-                                          @RequestParam String month,
-                                          @RequestParam String day,
-                                          @RequestParam String bookname,
-                                          @RequestParam Integer booknum) {
-
-
+                                 @RequestParam String year,
+                                 @RequestParam String month,
+                                 @RequestParam String day,
+                                 @RequestParam String bookname,
+                                 @RequestParam Integer booknum) {
 
         modelMap.put("year", year);
         modelMap.put("month", month);
@@ -45,16 +45,24 @@ public class BookingController {
     public String AddBooking(@PathVariable Integer dateid,
                              @PathVariable String bookname,
                              @PathVariable Integer booknum,
-                                        ModelMap modelMap) {
+                             ModelMap modelMap) {
 
-
+        List<Booking> bookings = new ArrayList<>();
 
         for (Booking b : BookingBase.list) {
-            if (dateid.equals(b.getDate()) && booknum<=(BookingBase.getMaxUsers() - prevSum)) {
+            if (dateid.equals(b.getDate()) && booknum <= (BookingBase.getMaxUsers() - prevSum)) {
                 prevSum += b.getPersonNum();
+                //bookings.add(b);
             }
         }
-        if (booknum<=(BookingBase.getMaxUsers() - prevSum)) {
+
+        for (Booking b : BookingBase.list) {
+            if (dateid.equals(b.getDate()))  bookings.add(b);
+        }
+
+        modelMap.put("previousbookings", bookings);
+
+        if (booknum <= (BookingBase.getMaxUsers() - prevSum)) {
 
             prevSum += booknum;
 
@@ -70,6 +78,5 @@ public class BookingController {
         prevSum = 0;
         return "bookdatedetails";
     }
-
 
 }
