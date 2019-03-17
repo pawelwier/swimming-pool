@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+Rok: <span th:text="${year}"></span>
+Miesiąc: <span th:text="${month}"></span>
+Dzień: <span th:text="${day}"></span>
+<br>
+<a th:href="@{|/date/${year}${month}${day}|}">Sprawdź</a>
+
+</body>
+</html>
