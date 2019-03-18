@@ -4,29 +4,24 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/style.css}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 
-<div>wybierz datę: </div>
-<form action="/checkdate">
-    <select name="year">
-        <option name="2019">2019</option>
-        <option name="2020">2020</option>
-        <option name="2021">2021</option>
-    </select> /
+<form action="/checkdate"><label>Data: </label>
     <select name="month">
-        <option name="01">01</option>
-        <option name="02">02</option>
-        <option name="03">03</option>
-        <option name="04">04</option>
-        <option name="05">05</option>
-        <option name="06">06</option>
-        <option name="07">07</option>
-        <option name="08">08</option>
-        <option name="09">09</option>
-        <option name="10">10</option>
-        <option name="11">11</option>
-        <option name="12">12</option>
+        <option name="01">styczeń</option>
+        <option name="02">luty</option>
+        <option name="03">marzec</option>
+        <option name="04">kwiecień</option>
+        <option name="05">maj</option>
+        <option name="06">czerwiec</option>
+        <option name="07">lipiec</option>
+        <option name="08">sierpień</option>
+        <option name="09">wrzesień</option>
+        <option name="10">październik</option>
+        <option name="11">listopad</option>
+        <option name="12">grudzień</option>
     </select> /
     <select name="day">
         <option name="01">01</option>
@@ -60,7 +55,17 @@
         <option name="29">29</option>
         <option name="30">30</option>
     </select>
-    <input type="submit" value="Sprawdź">
+    <br>
+    <label>Godzina: </label>
+    <select name="time">
+        <option name="1700">17:00</option>
+        <option name="1800">18:00</option>
+        <option name="1900">19:00</option>
+        <option name="2000">20:00</option>
+        <option name="2100">21:00</option>
+    </select>
+    <br>
+    <input class="btn btn-primary" type="submit" value="Sprawdź">
 </form>
 
 </body>

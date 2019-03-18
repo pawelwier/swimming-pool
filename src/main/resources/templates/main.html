@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/style.css}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
+<div class="main-view">
+<div class="main-header">Basen w Bełchatowie</div>
 <div th:text="${deletedbooking}"></div>
-<a href="/check">Sprawdź termin</a>
+<a class="btn btn-primary" href="/check">Sprawdź termin</a>
 <br>
-<a href="/book">Dodaj rezerwację</a>
+<a class="btn btn-primary" href="/book">Dodaj rezerwację</a>
 <br>
-<a href="/search">Szukaj rezerwacji po nazwisku</a>
+<a class="btn btn-primary" href="/search">Szukaj rezerwacji po nazwisku</a>
+</div>
 </body>
 </html>

@@ -30,12 +30,12 @@ public class CheckController {
 
     @RequestMapping("/checkdate")
     public String sonfirmHowManyAvailable(ModelMap modelMap,
-                                        @RequestParam String year,
+                                        @RequestParam String time,
                                         @RequestParam String month,
                                         @RequestParam String day) {
 
-        modelMap.put("year", year);
-        modelMap.put("month", month);
+        modelMap.put("time", BookingService.showTime(time));
+        modelMap.put("month", BookingService.showMonthNumber(month));
         modelMap.put("day", day);
         return "checkdate";
     }

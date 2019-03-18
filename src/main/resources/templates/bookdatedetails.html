@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/style.css}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body>
-
 
 <div th:text="${bookingmade}"></div>
+<div th:text="${bookingnum}"></div>
 <div th:text="${available}"></div>
-<a href="/book">Wróć</a>
+<div class="main-view">
+<a class="btn btn-primary" href="/book">Wróć</a>
 <br>
-<a href="/">Strona główna</a>
+<a class="btn btn-primary" href="/">Strona główna</a>
+</div>
 </body>
 </html>

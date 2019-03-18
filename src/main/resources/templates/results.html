@@ -4,18 +4,26 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/style.css}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 
-<table>
+<table class="table table-sm" style="width:500px">
+    <thead>
+    <tr>
+        <th>Nazwisko:</th>
+        <th>Ilość miejsc:</th>
+        <th></th>
+    </tr>
+    </thead>
     <tr th:each="result: ${results}">
-        <td>Nazwisko: <span th:text="${result.name}"></span></td>
-        <td>Data: <span th:text="${result.date}"></span></td>
-        <td>Ilość miejsc: <span th:text="${result.personNum}"></span></td>
-        <td><a th:href="@{|/booking/${result.name}/${result.personNum}/${result.date}/delete|}">
-            Usuń
+        <td><span th:text="${result.name}"></span></td>
+        <td><span th:text="${result.personNum}"></span></td>
+        <td><a class="btn btn-primary" th:href="@{|/date/${result.date}|}">
+            Pokaż
         </a></td>
     </tr>
 </table>
+<a class="btn btn-primary" href="/">Strona główna</a>
 </body>
 </html>

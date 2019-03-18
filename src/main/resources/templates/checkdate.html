@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/style.css}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 
-Rok: <span th:text="${year}"></span>
-Miesiąc: <span th:text="${month}"></span>
-Dzień: <span th:text="${day}"></span>
-<br>
-<a th:href="@{|/date/${year}${month}${day}|}">Sprawdź</a>
+<div class="booking-details">
+    Data: <span class="available-number" th:text="${day}"></span>.<span class="available-number" th:text="${month}"></span><span class="available-number">.2019</span>
+    <br>
+    Godzina: <span class="available-number" th:text="${time}"></span>
+</div>
+<a class="btn btn-primary" th:href="@{|/date/${time}${month}${day}|}">Pokaż</a>
 
 </body>
 </html>

@@ -27,14 +27,16 @@ public class BookingController {
 
     @RequestMapping("/bookdate")
     public String confirmBooking(ModelMap modelMap,
-                                 @RequestParam String year,
                                  @RequestParam String month,
                                  @RequestParam String day,
+                                 @RequestParam String time,
                                  @RequestParam String bookname,
                                  @RequestParam Integer booknum) {
 
-        modelMap.put("year", year);
-        modelMap.put("month", month);
+
+
+        modelMap.put("time", BookingService.showTime(time));
+        modelMap.put("month", BookingService.showMonthNumber(month));
         modelMap.put("day", day);
         modelMap.put("bookname", bookname);
         modelMap.put("booknum", booknum);
@@ -59,10 +61,12 @@ public class BookingController {
 
             BookingService.bookDate(dateid, booknum, bookname);
 
-            modelMap.put("bookingmade", "Rezerwacja na nazwisko " + bookname + ". Liczba miejsc: " + booknum);
+            modelMap.put("bookingmade", "Rezerwacja na nazwisko: " + bookname);
+            modelMap.put("bookingnum", "Liczba miejsc: " + booknum);
             modelMap.put("available", "Pozostało wolne: " + (BookingBase.getMaxUsers() - prevSum));
         } else {
             modelMap.put("bookingmade", "Rezerwacja niemożliwa.");
+            modelMap.put("bookingnum", "");
             modelMap.put("available", "Liczba rezerwowanych miejsc (" +
                     booknum + ") przewyższa liczbę wolnych miejsc w tym dniu (" + (BookingBase.getMaxUsers() - prevSum) + ").");
         }

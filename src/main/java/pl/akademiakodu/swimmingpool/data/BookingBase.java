@@ -20,10 +20,10 @@ public class BookingBase {
     public static List<Booking> list = new LinkedList<>();
 
         static {
-        Booking booking1 = new Booking(20190406, 3, "Kowalski");
-        Booking booking2 = new Booking(20190406, 2, "Janiak");
-        Booking booking3 = new Booking(20190310, 2, "Nowak");
-        Booking booking4 = new Booking(20190213, 6, "Małysz");
+        Booking booking1 = new Booking(18000406, 3, "Kowalski");
+        Booking booking2 = new Booking(18000406, 2, "Janiak");
+        Booking booking3 = new Booking(20000310, 2, "Nowak");
+        Booking booking4 = new Booking(19000213, 6, "Małysz");
 
         list.add(booking1);
         list.add(booking2);
