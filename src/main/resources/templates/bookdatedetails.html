@@ -3,15 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
 </head>
 <body>
-<div>Poprzednie rezerwacje:</div>
-<table>
-<tr th:each="booking: ${previousbookings}">
-    <td>Nazwisko:</td><td th:text="${booking.name}"></td>
-    <td>Ilość miejsc:</td><td th:text="${booking.personNum}"></td>
-</tr>
-</table>
+
 
 <div th:text="${bookingmade}"></div>
 <div th:text="${available}"></div>

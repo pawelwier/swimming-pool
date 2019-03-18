@@ -26,7 +26,7 @@ public class BookingController {
     }
 
     @RequestMapping("/bookdate")
-    public String ConfirmBooking(ModelMap modelMap,
+    public String confirmBooking(ModelMap modelMap,
                                  @RequestParam String year,
                                  @RequestParam String month,
                                  @RequestParam String day,
@@ -42,25 +42,16 @@ public class BookingController {
     }
 
     @RequestMapping("/bookdate/{dateid}/{bookname}/{booknum}")
-    public String AddBooking(@PathVariable Integer dateid,
+    public String addBooking(@PathVariable Integer dateid,
                              @PathVariable String bookname,
                              @PathVariable Integer booknum,
                              ModelMap modelMap) {
 
-        List<Booking> bookings = new ArrayList<>();
-
         for (Booking b : BookingBase.list) {
             if (dateid.equals(b.getDate()) && booknum <= (BookingBase.getMaxUsers() - prevSum)) {
                 prevSum += b.getPersonNum();
-                //bookings.add(b);
             }
         }
-
-        for (Booking b : BookingBase.list) {
-            if (dateid.equals(b.getDate()))  bookings.add(b);
-        }
-
-        modelMap.put("previousbookings", bookings);
 
         if (booknum <= (BookingBase.getMaxUsers() - prevSum)) {
 
@@ -78,5 +69,7 @@ public class BookingController {
         prevSum = 0;
         return "bookdatedetails";
     }
+
+
 
 }

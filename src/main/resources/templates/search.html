@@ -6,11 +6,11 @@
     <link rel="stylesheet" th:href="@{/style.css}"/>
 </head>
 <body>
-<div th:text="${deletedbooking}"></div>
-<a href="/check">Sprawdź termin</a>
+Szukaj po nazwisku:
 <br>
-<a href="/book">Dodaj rezerwację</a>
-<br>
-<a href="/search">Szukaj rezerwacji po nazwisku</a>
+<form action="/results">
+    <input type="text" name="q" />
+    <input type="submit" value="Szukaj">
+</form>
 </body>
 </html>

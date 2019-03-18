@@ -17,7 +17,7 @@ public class BookingBase {
         return maxUsers;
     }
 
-    public static List<Booking> list;
+    public static List<Booking> list = new LinkedList<>();
 
         static {
         Booking booking1 = new Booking(20190406, 3, "Kowalski");
@@ -25,7 +25,10 @@ public class BookingBase {
         Booking booking3 = new Booking(20190310, 2, "Nowak");
         Booking booking4 = new Booking(20190213, 6, "Małysz");
 
-        list = new LinkedList<>(Arrays.asList(booking1, booking2, booking3, booking4));
+        list.add(booking1);
+        list.add(booking2);
+        list.add(booking3);
+        list.add(booking4);
 
     }
 

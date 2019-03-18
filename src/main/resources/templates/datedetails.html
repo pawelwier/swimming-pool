@@ -3,9 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
 </head>
 <body>
+
+<div>Poprzednie rezerwacje:</div>
+<table>
+    <tr th:each="booking: ${previousbookings}">
+        <td>Nazwisko: <span th:text="${booking.name}"></span></td>
+        <td>Ilość miejsc: <span th:text="${booking.personNum}"></span></td>
+        <td><a th:href="@{|/booking/${booking.name}/${booking.personNum}/${booking.date}/delete|}">
+            Usuń
+        </a></td>
+    </tr>
+</table>
+
 Wolne miejsca: <span th:text="${available}"></span>
+<br>
+<div>Tor 1: <span th:text="${track1}"></span> / 4</div>
+<div>Tor 2: <span th:text="${track2}"></span> / 4</div>
+<div>Tor 3: <span th:text="${track3}"></span> / 4</div>
+
 <br>
 <a href="/check">Wróć</a>
 <br>

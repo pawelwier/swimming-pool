@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+</head>
+<body>
+
+<table>
+    <tr th:each="result: ${results}">
+        <td>Nazwisko: <span th:text="${result.name}"></span></td>
+        <td>Data: <span th:text="${result.date}"></span></td>
+        <td>Ilość miejsc: <span th:text="${result.personNum}"></span></td>
+        <td><a th:href="@{|/booking/${result.name}/${result.personNum}/${result.date}/delete|}">
+            Usuń
+        </a></td>
+    </tr>
+</table>
+</body>
+</html>
