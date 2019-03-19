@@ -47,16 +47,10 @@ public class CheckController {
 
         modelMap.put("previousbookings", bookings);
 
-
-        for (Booking b : BookingBase.list) {
-            if (dateid.equals(b.getDate())) {
-                prevSum += b.getPersonNum();
-            }
-        }
-            modelMap.put("available", BookingBase.getMaxUsers() - prevSum);
-            modelMap.put("track1", CheckService.countTrack1(prevSum));
-            modelMap.put("track2", CheckService.countTrack2(prevSum));
-            modelMap.put("track3", CheckService.countTrack3(prevSum));
+            modelMap.put("available", BookingBase.getMaxUsers() - CheckService.updatePrevSum(dateid, prevSum));
+            modelMap.put("track1", CheckService.countTrack1(CheckService.updatePrevSum(dateid, prevSum)));
+            modelMap.put("track2", CheckService.countTrack2(CheckService.updatePrevSum(dateid, prevSum)));
+            modelMap.put("track3", CheckService.countTrack3(CheckService.updatePrevSum(dateid, prevSum)));
 
             prevSum = 0;
 

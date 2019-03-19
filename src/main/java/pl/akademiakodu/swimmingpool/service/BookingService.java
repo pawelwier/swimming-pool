@@ -1,14 +1,11 @@
 package pl.akademiakodu.swimmingpool.service;
 
-import pl.akademiakodu.swimmingpool.controller.CheckController;
 import pl.akademiakodu.swimmingpool.data.BookingBase;
 import pl.akademiakodu.swimmingpool.model.Booking;
 
 import java.util.List;
 
 public class BookingService {
-
-    int prevSum = 0;
 
     public static List<Booking> bookDate(Integer date, Integer num, String name) {
 
@@ -48,5 +45,7 @@ public class BookingService {
                                 ))));
         return hourNum;
     }
+
+
 
 }

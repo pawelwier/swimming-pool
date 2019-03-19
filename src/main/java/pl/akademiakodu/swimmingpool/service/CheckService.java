@@ -1,6 +1,5 @@
 package pl.akademiakodu.swimmingpool.service;
 
-import org.springframework.web.bind.annotation.PathVariable;
 import pl.akademiakodu.swimmingpool.data.BookingBase;
 import pl.akademiakodu.swimmingpool.model.Booking;
 
@@ -48,6 +47,14 @@ public class CheckService {
         int track3 = people/3;
 
         return track3;
+    }
+
+    public static Integer updatePrevSum(Integer dateid, Integer prevSum) {
+        for (Booking b : BookingBase.list) {
+            if (dateid.equals(b.getDate())) {
+                prevSum += b.getPersonNum();
+            }
+        } return prevSum;
     }
 
 }
