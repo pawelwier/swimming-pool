@@ -18,6 +18,7 @@ import java.util.List;
 public class BookingController {
 
     public int prevSum = 0;
+    public String dateIndex = "";
 
     @GetMapping("/book")
     public String showBookingForm() {
@@ -33,14 +34,14 @@ public class BookingController {
                                  @RequestParam String bookname,
                                  @RequestParam Integer booknum) {
 
-
+        dateIndex = BookingService.showTime(time) + BookingService.showMonthNumber(month) + day;
 
         modelMap.put("time", BookingService.showTime(time));
         modelMap.put("month", BookingService.showMonthNumber(month));
         modelMap.put("day", day);
         modelMap.put("bookname", bookname);
         modelMap.put("booknum", booknum);
-        return "bookingdate";
+        return "redirect:/bookdate/"+dateIndex+"/"+bookname+"/"+booknum;
     }
 
     @RequestMapping("/bookdate/{dateid}/{bookname}/{booknum}")

@@ -19,7 +19,6 @@ import java.util.List;
 @Controller
 public class CheckController {
 
-
     int prevSum = 0;
 
     @GetMapping("/check")
@@ -37,7 +36,7 @@ public class CheckController {
         modelMap.put("time", BookingService.showTime(time));
         modelMap.put("month", BookingService.showMonthNumber(month));
         modelMap.put("day", day);
-        return "checkdate";
+        return "redirect:/date/"+BookingService.showTime(time)+BookingService.showMonthNumber(month)+day;
     }
 
     @RequestMapping("/date/{dateid}")
