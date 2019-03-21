@@ -1,5 +1,6 @@
 package pl.akademiakodu.swimmingpool.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,12 +21,18 @@ public class BookingController {
     public int prevSum = 0;
     public String dateIndex = "";
 
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login";
+    }
+
     @GetMapping("/book")
     public String showBookingForm() {
 
         return "addbooking";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/bookdate")
     public String confirmBooking(ModelMap modelMap,
                                  @RequestParam String month,
@@ -36,14 +43,17 @@ public class BookingController {
 
         dateIndex = BookingService.showTime(time) + BookingService.showMonthNumber(month) + day;
 
+        if (bookname!=null && !bookname.equals("") && booknum!=null) {modelMap.put("bookname", bookname);
         modelMap.put("time", BookingService.showTime(time));
         modelMap.put("month", BookingService.showMonthNumber(month));
         modelMap.put("day", day);
-        modelMap.put("bookname", bookname);
         modelMap.put("booknum", booknum);
-        return "redirect:/bookdate/"+dateIndex+"/"+bookname+"/"+booknum;
+        return "redirect:/bookdate/"+dateIndex+"/"+bookname+"/"+booknum;}
+        else {modelMap.put("noanswer","");
+            return "addbooking";}
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/bookdate/{dateid}/{bookname}/{booknum}")
     public String addBooking(@PathVariable Integer dateid,
                              @PathVariable String bookname,

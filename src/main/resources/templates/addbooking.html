@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Basen | Dodaj rezerwację</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/style.css}"/>
 </head>
@@ -64,11 +64,15 @@
         <option name="2100">21:00</option>
     </select>
     <br>
+    <div class="nonameprovided" th:if="${noanswer}">Wpisz nazwisko i liczbę rezerwowanych miejsc</div>
     <label>Nazwisko:</label> <input size="10" name="bookname" type="text"><br>
     <label>Liczba miejsc:</label> <input class="book-input" min="1" max="12" name="booknum" type="number">
     <br>
-    <input class="btn btn-primary" type="submit" value="Dodaj">
+    <div class="main-view">
+        <input class="btn btn-primary" type="submit" value="Dodaj">
+        <br>
+        <a class="btn btn-primary" href="/">Wróć</a>
+    </div>
 </form>
-
 </body>
 </html>

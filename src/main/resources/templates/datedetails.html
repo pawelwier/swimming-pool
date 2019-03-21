@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Basen | Szczegóły</title>
     <link rel="stylesheet" th:href="@{/style.css}"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
@@ -17,16 +17,18 @@
     </tr>
     </thead>
     <tr th:each="booking: ${previousbookings}">
-        <td> <span th:text="${booking.name}"></span></td>
+        <td> <span th:if="${flag}" th:text="${booking.name}"></span>
+            <span th:if="!${flag}"> &ndash; </span></td>
         <td> <span th:text="${booking.personNum}"></span></td>
-        <td><a th:href="@{|/booking/${booking.name}/${booking.personNum}/${booking.date}/delete|}">
+        <td th:if="${flag}"><a th:href="@{|/booking/${booking.name}/${booking.personNum}/${booking.date}/delete|}">
             Usuń
-        </a></td>
+    </a></td>
     </tr>
 </table>
 
 Wolne miejsca: <span class="available-number" th:text="${available}"></span>
 <div class="tracks">
+    <div>Obłożenie:</div>
     <div><span class="track-label">Tor 1:</span> <span th:text="${track1}"></span> / 4</div>
     <div><span class="track-label">Tor 2:</span> <span th:text="${track2}"></span> / 4</div>
     <div><span class="track-label">Tor 3:</span> <span th:text="${track3}"></span> / 4</div>
@@ -36,5 +38,6 @@ Wolne miejsca: <span class="available-number" th:text="${available}"></span>
 <br>
 <a class="btn btn-primary" href="/">Strona główna</a>
 </div>
+
 </body>
 </html>

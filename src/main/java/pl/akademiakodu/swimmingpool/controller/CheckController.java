@@ -39,23 +39,23 @@ public class CheckController {
         return "redirect:/date/"+BookingService.showTime(time)+BookingService.showMonthNumber(month)+day;
     }
 
-    @RequestMapping("/date/{dateid}")
-    public String checkHowManyAvailable(@PathVariable Integer dateid,
-                                        ModelMap modelMap) {
-
-       List<Booking> bookings = CheckService.CheckForPreviousBookings(dateid);
-
-        modelMap.put("previousbookings", bookings);
-
-            modelMap.put("available", BookingBase.getMaxUsers() - CheckService.updatePrevSum(dateid, prevSum));
-            modelMap.put("track1", CheckService.countTrack1(CheckService.updatePrevSum(dateid, prevSum)));
-            modelMap.put("track2", CheckService.countTrack2(CheckService.updatePrevSum(dateid, prevSum)));
-            modelMap.put("track3", CheckService.countTrack3(CheckService.updatePrevSum(dateid, prevSum)));
-
-            prevSum = 0;
-
-            return "datedetails";
-    }
+//    @RequestMapping("/date/{dateid}")
+//    public String checkHowManyAvailable(@PathVariable Integer dateid,
+//                                        ModelMap modelMap) {
+//
+//       List<Booking> bookings = CheckService.CheckForPreviousBookings(dateid);
+//
+//        modelMap.put("previousbookings", bookings);
+//
+//            modelMap.put("available", BookingBase.getMaxUsers() - CheckService.updatePrevSum(dateid, prevSum));
+//            modelMap.put("track1", CheckService.countTrack1(CheckService.updatePrevSum(dateid, prevSum)));
+//            modelMap.put("track2", CheckService.countTrack2(CheckService.updatePrevSum(dateid, prevSum)));
+//            modelMap.put("track3", CheckService.countTrack3(CheckService.updatePrevSum(dateid, prevSum)));
+//
+//            prevSum = 0;
+//
+//            return "datedetails";
+//    }
 
     @RequestMapping("/booking/{bookname}/{booknum}/{dateid}/delete")
     public String deleteSelectedBooking(@PathVariable String bookname,

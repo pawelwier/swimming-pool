@@ -20,9 +20,10 @@ public class SearchController {
     public String showMain(@RequestParam(required = false) String q,
                             ModelMap modelMap) {
 
-        if (q != null) modelMap.put("results", searchByName(q));
-
-        return "results";
+        if (q != null && !q.equals("")) {modelMap.put("results", searchByName(q));
+        return "results";}
+        else {modelMap.put("noanswer","");
+        return "search";}
     }
 
 }
