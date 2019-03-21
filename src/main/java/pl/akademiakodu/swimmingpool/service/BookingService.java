@@ -7,7 +7,7 @@ import java.util.List;
 
 public class BookingService {
 
-    public static List<Booking> bookDate(Integer date, Integer num, String name) {
+    public static List<Booking> bookDate(String date, Integer num, String name) {
 
         Booking booking = new Booking(date, num, name);
 
@@ -17,23 +17,6 @@ public class BookingService {
 
     }
 
-    public static String showMonthNumber(String month) {
-
-
-        String monthNum = (month.equals("styczeń") ? "01" :
-                (month.equals("luty") ? "02" :
-                        (month.equals("marzec") ? "03" :
-                                (month.equals("kwiecień") ? "04" :
-                                        (month.equals("maj") ? "05" :
-                                                (month.equals("czerwiec") ? "06" :
-                                                        (month.equals("lipiec") ? "07" :
-                                                                (month.equals("sierpień") ? "08" :
-                                                                        (month.equals("wrzesień") ? "09" :
-                                                                                (month.equals("październik") ? "10" :
-                                                                                        (month.equals("listopad") ? "11" : "12"
-                                                                                        )))))))))));
-     return monthNum;
-}
 
     public static String showTime(String hour) {
 
@@ -45,7 +28,5 @@ public class BookingService {
                                 ))));
         return hourNum;
     }
-
-
 
 }

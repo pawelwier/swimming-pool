@@ -1,5 +1,7 @@
 package pl.akademiakodu.swimmingpool.controller;
 
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +21,11 @@ import java.util.List;
 @Controller
 public class CheckController {
 
+    CheckService checkService = new CheckService();
+
     int prevSum = 0;
+    private String auth;
+    public boolean flag = false;
 
     @GetMapping("/check")
     public String showReservations() {
@@ -30,37 +36,42 @@ public class CheckController {
     @RequestMapping("/checkdate")
     public String sonfirmHowManyAvailable(ModelMap modelMap,
                                         @RequestParam String time,
-                                        @RequestParam String month,
-                                        @RequestParam String day) {
+                                        @RequestParam String fulldate) {
 
         modelMap.put("time", BookingService.showTime(time));
-        modelMap.put("month", BookingService.showMonthNumber(month));
-        modelMap.put("day", day);
-        return "redirect:/date/"+BookingService.showTime(time)+BookingService.showMonthNumber(month)+day;
+        modelMap.put("fulldate", fulldate);
+        return "redirect:/date/"+BookingService.showTime(time)+checkService.getDateNoSlash(fulldate);
+
     }
 
-//    @RequestMapping("/date/{dateid}")
-//    public String checkHowManyAvailable(@PathVariable Integer dateid,
-//                                        ModelMap modelMap) {
-//
-//       List<Booking> bookings = CheckService.CheckForPreviousBookings(dateid);
-//
-//        modelMap.put("previousbookings", bookings);
-//
-//            modelMap.put("available", BookingBase.getMaxUsers() - CheckService.updatePrevSum(dateid, prevSum));
-//            modelMap.put("track1", CheckService.countTrack1(CheckService.updatePrevSum(dateid, prevSum)));
-//            modelMap.put("track2", CheckService.countTrack2(CheckService.updatePrevSum(dateid, prevSum)));
-//            modelMap.put("track3", CheckService.countTrack3(CheckService.updatePrevSum(dateid, prevSum)));
-//
-//            prevSum = 0;
-//
-//            return "datedetails";
-//    }
+    @RequestMapping("/date/{dateid}")
+    public String checkHowManyAvailable(@PathVariable String dateid,
+                                        ModelMap modelMap) {
+
+        SecurityContext context = SecurityContextHolder.getContext();
+        auth = context.getAuthentication().getName();
+        if (auth.equals("admin")) {flag = true;}
+
+        modelMap.addAttribute("flag", flag);
+
+       List<Booking> bookings = CheckService.CheckForPreviousBookings(dateid);
+
+        modelMap.put("previousbookings", bookings);
+
+            modelMap.put("available", BookingBase.getMaxUsers() - CheckService.updatePrevSum(dateid, prevSum));
+            modelMap.put("track1", CheckService.countTrack1(CheckService.updatePrevSum(dateid, prevSum)));
+            modelMap.put("track2", CheckService.countTrack2(CheckService.updatePrevSum(dateid, prevSum)));
+            modelMap.put("track3", CheckService.countTrack3(CheckService.updatePrevSum(dateid, prevSum)));
+
+            prevSum = 0;
+
+            return "datedetails";
+    }
 
     @RequestMapping("/booking/{bookname}/{booknum}/{dateid}/delete")
     public String deleteSelectedBooking(@PathVariable String bookname,
                                 @PathVariable Integer booknum,
-                                @PathVariable Integer dateid,
+                                @PathVariable String dateid,
                                 RedirectAttributes redirectAttributes) {
 
         CheckService.deleteBooking(bookname, booknum, dateid);

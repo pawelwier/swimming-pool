@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CheckService {
 
-    public static void deleteBooking(String bookname, Integer booknum, Integer dateid) {
+    public static void deleteBooking(String bookname, Integer booknum, String dateid) {
         for (Iterator<Booking> iterator = BookingBase.list.iterator(); iterator.hasNext(); ) {
             Booking b = iterator.next();
             if (b.getDate().equals(dateid) && b.getPersonNum().equals(booknum) && b.getName().equals(bookname)) {
@@ -18,7 +18,7 @@ public class CheckService {
         }
     }
 
-    public static List<Booking> CheckForPreviousBookings(Integer dateid) {
+    public static List<Booking> CheckForPreviousBookings(String dateid) {
         List<Booking> bookings = new ArrayList<>();
 
         for (Booking b : BookingBase.list) {
@@ -49,12 +49,23 @@ public class CheckService {
         return track3;
     }
 
-    public static Integer updatePrevSum(Integer dateid, Integer prevSum) {
+    public static Integer updatePrevSum(String dateid, Integer prevSum) {
         for (Booking b : BookingBase.list) {
             if (dateid.equals(b.getDate())) {
                 prevSum += b.getPersonNum();
             }
         } return prevSum;
+    }
+
+    public String getDateNoSlash(String word) {
+        char[] array = word.toCharArray();
+
+        String result = "";
+        for (int i = 0; i < array.length ; i++) {
+            if(array[i] != '/') {
+                result += array[i];
+            }
+        } return result;
     }
 
 }

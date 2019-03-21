@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import pl.akademiakodu.swimmingpool.data.BookingBase;
 import pl.akademiakodu.swimmingpool.model.Booking;
 import pl.akademiakodu.swimmingpool.service.BookingService;
-
-import java.awt.print.Book;
-import java.util.ArrayList;
-import java.util.List;
+import pl.akademiakodu.swimmingpool.service.CheckService;
 
 @Controller
 public class BookingController {
 
+    CheckService checkService = new CheckService();
+
     public int prevSum = 0;
     public String dateIndex = "";
+
 
     @GetMapping("/login")
     public String loginPage() {
@@ -35,27 +35,29 @@ public class BookingController {
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/bookdate")
     public String confirmBooking(ModelMap modelMap,
-                                 @RequestParam String month,
-                                 @RequestParam String day,
+                                 @RequestParam String fulldate,
                                  @RequestParam String time,
                                  @RequestParam String bookname,
                                  @RequestParam Integer booknum) {
 
-        dateIndex = BookingService.showTime(time) + BookingService.showMonthNumber(month) + day;
+        dateIndex = BookingService.showTime(time) + checkService.getDateNoSlash(fulldate);;
 
-        if (bookname!=null && !bookname.equals("") && booknum!=null) {modelMap.put("bookname", bookname);
-        modelMap.put("time", BookingService.showTime(time));
-        modelMap.put("month", BookingService.showMonthNumber(month));
-        modelMap.put("day", day);
-        modelMap.put("booknum", booknum);
-        return "redirect:/bookdate/"+dateIndex+"/"+bookname+"/"+booknum;}
+        if (bookname!=null && !bookname.equals("") && booknum!=null) {
+
+            modelMap.put("bookname", bookname);
+            modelMap.put("time", BookingService.showTime(time));
+            modelMap.put("booknum", booknum);
+            modelMap.put("fulldate", fulldate);
+        return "redirect:/bookdate/"+dateIndex +"/"+bookname+"/"+booknum;}
+
+
         else {modelMap.put("noanswer","");
             return "addbooking";}
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/bookdate/{dateid}/{bookname}/{booknum}")
-    public String addBooking(@PathVariable Integer dateid,
+    public String addBooking(@PathVariable String dateid,
                              @PathVariable String bookname,
                              @PathVariable Integer booknum,
                              ModelMap modelMap) {
